@@ -1,0 +1,17 @@
+name: VibrateEveryX
+options:
+  bundleIdPrefix: de.felixfoertsch
+targets:
+  VibrateEveryX:
+    type: application
+    platform: iOS
+    deploymentTarget: "11"
+    sources: VibrateEveryX
+  VibrateEveryX WatchKit App:
+    type: application
+    platform: watchOS
+    sources: VibrateEveryX WatchKit App
+  VibrateEveryX WatchKit Extension:
+    type: application
+    platform: watchOS
+    sources: VibrateEveryX WatchKit Extension    
