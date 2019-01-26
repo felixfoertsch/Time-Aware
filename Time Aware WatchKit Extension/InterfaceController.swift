@@ -11,7 +11,19 @@ import Foundation
 
 
 class InterfaceController: WKInterfaceController {
+    var looping = true
 
+    @IBAction func loopSwitched(_ value: Bool) {
+        self.looping = value
+    }
+    @IBOutlet weak var loopOutlet: WKInterfaceSwitch!
+    
+    @IBAction func retryButtonPressed() {
+        while looping {
+            WKInterfaceDevice.current().play(.retry)
+            sleep(2)
+        }
+    }
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
