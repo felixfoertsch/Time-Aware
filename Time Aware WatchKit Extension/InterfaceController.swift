@@ -1,42 +1,38 @@
-//
-//  InterfaceController.swift
-//  Time Aware WatchKit Extension
-//
-//  Created by Felix Förtsch on 26.01.19.
-//  Copyright © 2019 Felix Förtsch. All rights reserved.
-//
-
 import WatchKit
 import Foundation
 
-
 class InterfaceController: WKInterfaceController {
-    var looping = true
-
     @IBOutlet weak var hourPickerOutlet: WKInterfacePicker!
     @IBOutlet weak var minutePickerOutlet: WKInterfacePicker!
+
+    let hours = [0, 1, 2]
+    var minutes = [Int]()
     
-    @IBAction func loopSwitched(_ value: Bool) {
-        self.looping = value
+    var selectedHoursInMinutes = Int()
+    var selectedMinutes = Int()
+
+    @IBAction func hourPickerChanged(_ value: Int) {
+        selectedHoursInMinutes = 60 * hours[value]
     }
-    @IBOutlet weak var loopOutlet: WKInterfaceSwitch!
+    @IBAction func minutePickerChanged(_ value: Int) {
+        selectedMinutes = minutes[value]
+    }
     
-    @IBAction func retryButtonPressed() {
-        while looping {
-            WKInterfaceDevice.current().play(.retry)
-            sleep(2)
-        }
+    @IBAction func vibrateButtonPressed() {
+        let timesToVibrate = (selectedHoursInMinutes + selectedMinutes) / 300
+        
+        Timer.scheduledTimer(timeInterval: TimeInterval(exactly: 5)!,
+                             target: self, selector: #selector(vibrate),
+                             userInfo: nil, repeats: true)
     }
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
         // Configure interface objects here.
     }
     
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        let hours = ["0", "1", "2"]
         let hourItems: [WKPickerItem] = hours.map {
             let pickerItem = WKPickerItem()
             pickerItem.title = "\($0)"
@@ -44,9 +40,8 @@ class InterfaceController: WKInterfaceController {
         }
         hourPickerOutlet.setItems(hourItems)
         
-        var minutes = [String]()
-        for i in 0 ... 59 {
-            minutes.append("\(i)")
+        for i in 0 ... 11 {
+            minutes.append(i*5)
         }
         let minuteItems: [WKPickerItem] = minutes.map {
             let pickerItem = WKPickerItem()
@@ -61,4 +56,8 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
 
+    
+    @objc func vibrate() {
+        WKInterfaceDevice.current().play(.retry)
+    }
 }

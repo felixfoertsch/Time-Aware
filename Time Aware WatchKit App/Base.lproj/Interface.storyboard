@@ -14,40 +14,42 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Time_Aware_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group height="50" alignment="center" id="Liu-8b-II2">
+                        <group height="83" alignment="center" id="Liu-8b-II2">
                             <items>
                                 <label alignment="left" verticalAlignment="center" text="H " id="7IN-5n-BqT">
                                     <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                 </label>
-                                <picker width="40" height="1" alignment="left" focusStyle="stack" id="gBz-Y4-9EH"/>
+                                <picker width="40" height="1" alignment="left" focusStyle="stack" id="gBz-Y4-9EH">
+                                    <connections>
+                                        <action selector="hourPickerChanged:" destination="AgC-eL-Hgc" id="C3b-rk-cOl"/>
+                                    </connections>
+                                </picker>
                                 <label alignment="left" verticalAlignment="center" text=":" id="Fh0-QR-umF">
                                     <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                 </label>
-                                <picker width="40" height="1" alignment="left" focusStyle="stack" id="ViT-V0-rUu"/>
+                                <picker width="40" height="1" alignment="left" focusStyle="stack" id="ViT-V0-rUu">
+                                    <connections>
+                                        <action selector="minutePickerChanged:" destination="AgC-eL-Hgc" id="4Hw-Lw-sSI"/>
+                                    </connections>
+                                </picker>
                                 <label alignment="left" verticalAlignment="center" text=" M" id="IXS-YC-K6g">
                                     <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
                                 </label>
                             </items>
                         </group>
-                        <switch width="1" alignment="left" value="YES" title="Loop" id="z4p-zV-BKo">
-                            <connections>
-                                <action selector="loopSwitched:" destination="AgC-eL-Hgc" id="CeB-xw-ZLW"/>
-                            </connections>
-                        </switch>
                         <button width="1" alignment="left" title="Vibrate" id="Hs7-qb-rGj">
                             <connections>
-                                <action selector="retryButtonPressed" destination="AgC-eL-Hgc" id="pWu-XN-OgY"/>
+                                <action selector="vibrateButtonPressed" destination="AgC-eL-Hgc" id="pWu-XN-OgY"/>
                             </connections>
                         </button>
                     </items>
                     <connections>
-                        <outlet property="hourPickerOutlet" destination="gBz-Y4-9EH" id="Thr-Sp-bdH"/>
-                        <outlet property="loopOutlet" destination="z4p-zV-BKo" id="GSA-2H-0Mz"/>
+                        <outlet property="hourPickerOutlet" destination="gBz-Y4-9EH" id="spJ-ZY-iI4"/>
                         <outlet property="minutePickerOutlet" destination="ViT-V0-rUu" id="lNL-gz-FKW"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="169" y="162"/>
+            <point key="canvasLocation" x="-143" y="643"/>
         </scene>
         <!--Static Notification Interface Controller-->
         <scene sceneID="AEw-b0-oYE">
@@ -71,14 +73,14 @@
             <objects>
                 <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Time_Aware_WatchKit_App" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="468" y="643"/>
+            <point key="canvasLocation" x="509" y="643"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
             <objects>
                 <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="Time_Aware_WatchKit_App" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="468" y="345"/>
+            <point key="canvasLocation" x="220" y="1009"/>
         </scene>
     </scenes>
 </document>
