@@ -14,10 +14,19 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Time_Aware_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="100" alignment="center" id="Liu-8b-II2">
+                        <group height="50" alignment="center" id="Liu-8b-II2">
                             <items>
-                                <picker width="50" height="1" alignment="left" id="gBz-Y4-9EH"/>
-                                <picker width="50" height="1" alignment="left" id="ViT-V0-rUu"/>
+                                <label alignment="left" verticalAlignment="center" text="H " id="7IN-5n-BqT">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <picker width="40" height="1" alignment="left" focusStyle="stack" id="gBz-Y4-9EH"/>
+                                <label alignment="left" verticalAlignment="center" text=":" id="Fh0-QR-umF">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <picker width="40" height="1" alignment="left" focusStyle="stack" id="ViT-V0-rUu"/>
+                                <label alignment="left" verticalAlignment="center" text=" M" id="IXS-YC-K6g">
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
                             </items>
                         </group>
                         <switch width="1" alignment="left" value="YES" title="Loop" id="z4p-zV-BKo">
@@ -32,7 +41,9 @@
                         </button>
                     </items>
                     <connections>
+                        <outlet property="hourPickerOutlet" destination="gBz-Y4-9EH" id="Thr-Sp-bdH"/>
                         <outlet property="loopOutlet" destination="z4p-zV-BKo" id="GSA-2H-0Mz"/>
+                        <outlet property="minutePickerOutlet" destination="ViT-V0-rUu" id="lNL-gz-FKW"/>
                     </connections>
                 </controller>
             </objects>

@@ -13,6 +13,9 @@ import Foundation
 class InterfaceController: WKInterfaceController {
     var looping = true
 
+    @IBOutlet weak var hourPickerOutlet: WKInterfacePicker!
+    @IBOutlet weak var minutePickerOutlet: WKInterfacePicker!
+    
     @IBAction func loopSwitched(_ value: Bool) {
         self.looping = value
     }
@@ -33,6 +36,24 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
+        let hours = ["0", "1", "2"]
+        let hourItems: [WKPickerItem] = hours.map {
+            let pickerItem = WKPickerItem()
+            pickerItem.title = "\($0)"
+            return pickerItem
+        }
+        hourPickerOutlet.setItems(hourItems)
+        
+        var minutes = [String]()
+        for i in 0 ... 59 {
+            minutes.append("\(i)")
+        }
+        let minuteItems: [WKPickerItem] = minutes.map {
+            let pickerItem = WKPickerItem()
+            pickerItem.title = "\($0)"
+            return pickerItem
+        }
+        minutePickerOutlet.setItems(minuteItems)
     }
     
     override func didDeactivate() {
