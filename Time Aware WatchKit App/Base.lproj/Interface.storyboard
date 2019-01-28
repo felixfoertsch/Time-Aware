@@ -10,6 +10,19 @@
     </dependencies>
     <scenes>
         <!--Interface Controller-->
+        <scene sceneID="RFZ-Lw-XnD">
+            <objects>
+                <controller id="ACr-VD-RzG">
+                    <items>
+                        <label height="280" alignment="left" text="Time Aware works best, if the Wake Screen option is set to always." textAlignment="center" baselineAdjustment="alignCenters" numberOfLines="4" id="chp-rT-bTR">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-83" y="275"/>
+        </scene>
+        <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Time_Aware_WatchKit_App" customModuleProvider="target">
@@ -28,6 +41,11 @@
                         <button width="1" alignment="left" title="Present" id="Hs7-qb-rGj">
                             <connections>
                                 <action selector="vibrateButtonPressed" destination="AgC-eL-Hgc" id="pWu-XN-OgY"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Segue" id="ih7-ia-2Mx">
+                            <connections>
+                                <segue destination="FnS-V6-1Dr" kind="push" id="xKt-tW-wbW"/>
                             </connections>
                         </button>
                     </items>
@@ -62,6 +80,19 @@
                 <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Time_Aware_WatchKit_App" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="509" y="643"/>
+        </scene>
+        <!--Interface Controller-->
+        <scene sceneID="qQF-7w-bMK">
+            <objects>
+                <controller id="FnS-V6-1Dr">
+                    <items>
+                        <label width="136" height="128" alignment="center" text="20:00" id="sMj-Wa-mEG">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-143" y="1110"/>
         </scene>
         <!--Notification Controller-->
         <scene sceneID="Niz-AI-uX2">
