@@ -2,26 +2,25 @@ import WatchKit
 import Foundation
 
 class InterfaceController: WKInterfaceController {
-    @IBOutlet weak var hourPickerOutlet: WKInterfacePicker!
     @IBOutlet weak var minutePickerOutlet: WKInterfacePicker!
-
-    let hours = [0, 1, 2]
+    @IBOutlet weak var setTimeOutlet: WKInterfaceLabel!
+    
     var minutes = [Int]()
     
     var selectedHoursInMinutes = Int()
     var selectedMinutes = Int()
+    var setTimeInSeconds = 0
 
-    @IBAction func hourPickerChanged(_ value: Int) {
-        selectedHoursInMinutes = 60 * hours[value]
-    }
     @IBAction func minutePickerChanged(_ value: Int) {
         selectedMinutes = minutes[value]
+        setTimeOutlet.setText("\(selectedMinutes)")
     }
     
     @IBAction func vibrateButtonPressed() {
-        let timesToVibrate = (selectedHoursInMinutes + selectedMinutes) / 300
-        
-        Timer.scheduledTimer(timeInterval: TimeInterval(exactly: 5)!,
+        WKInterfaceDevice.current().play(.start)
+        setTimeInSeconds = 60 * selectedMinutes
+        setTimeOutlet.setText("\(selectedMinutes)")
+        Timer.scheduledTimer(timeInterval: TimeInterval(exactly: 10)!,
                              target: self, selector: #selector(vibrate),
                              userInfo: nil, repeats: true)
     }
@@ -33,22 +32,18 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        let hourItems: [WKPickerItem] = hours.map {
-            let pickerItem = WKPickerItem()
-            pickerItem.title = "\($0)"
-            return pickerItem
-        }
-        hourPickerOutlet.setItems(hourItems)
         
-        for i in 0 ... 11 {
+        for i in 1 ... 18 {
             minutes.append(i*5)
         }
         let minuteItems: [WKPickerItem] = minutes.map {
             let pickerItem = WKPickerItem()
             pickerItem.title = "\($0)"
+            pickerItem.caption = "MINUTES"
             return pickerItem
         }
         minutePickerOutlet.setItems(minuteItems)
+        minutePickerOutlet.setSelectedItemIndex(3)
     }
     
     override func didDeactivate() {
@@ -56,8 +51,17 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
 
-    
     @objc func vibrate() {
-        WKInterfaceDevice.current().play(.retry)
+        setTimeInSeconds = setTimeInSeconds - 10
+        setTimeOutlet.setText("\(setTimeInSeconds)")
+        if (setTimeInSeconds % 300 == 0) {
+            WKInterfaceDevice.current().play(.retry)
+        } else if (setTimeInSeconds == 180) {
+            WKInterfaceDevice.current().play(.retry)
+        } else if (setTimeInSeconds == 60) {
+            WKInterfaceDevice.current().play(.notification)
+        } else if (setTimeInSeconds == 30) {
+            WKInterfaceDevice.current().play(.notification)
+        }
     }
 }
